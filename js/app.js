@@ -1,4 +1,4 @@
-/**
+﻿/**
  * ==========================================================================
  * 🌸 PROJECT: HAPPY BIRTHDAY CẨM LÌNH (20TH BIRTHDAY) - RESCUE EARTH
  * 👨‍💻 DEVELOPED & ARCHITECTED BY: HoangTung24Jul
@@ -284,48 +284,74 @@ document.addEventListener("DOMContentLoaded", () => {
             setTimeout(() => cutsceneStage.classList.add("active"), 30);
         }
 
-        // Reset trạng thái các phần tử cutscene
+        // Reset tráº¡ng thÃ¡i cÃ¡c pháº§n tá»­ cutscene
         if (cutsceneEngineer) cutsceneEngineer.classList.remove("running", "at-desk");
         if (cutsceneViewport) cutsceneViewport.classList.remove("zooming-into-monitor", "screen-rumble");
-        if (emergencySafetyBtn) emergencySafetyBtn.classList.remove("pressed");
+        if (emergencySafetyBtn) {
+            emergencySafetyBtn.classList.remove("pressed", "ready-to-press");
+        }
         if (engineerBubble) {
             engineerBubble.classList.remove("show");
-            engineerBubble.textContent = "BÁO ĐỘNG ĐỎ! LÒ PHẢN ỨNG QUÁ TẢI RỒI! 😱💥";
+            engineerBubble.textContent = "BÃO Äá»˜NG Äá»Ž! LÃ’ PHáº¢N á»¨NG QUÃ Táº¢I Rá»’I! ðŸ˜±ðŸ’¥";
         }
 
-        // 0.3s: Kỹ sư bắt đầu chạy dồn dập vào phòng điều khiển
+        let hasTriggeredSafety = false;
+
+        function triggerSafetyButtonPress() {
+            if (hasTriggeredSafety || isSkipped) return;
+            hasTriggeredSafety = true;
+
+            if (emergencySafetyBtn) {
+                emergencySafetyBtn.classList.remove("ready-to-press");
+                emergencySafetyBtn.classList.add("pressed");
+            }
+            if (cutsceneEngineer) cutsceneEngineer.classList.add("at-desk");
+            window.soundEngine.playButtonSlam();
+            if (cutsceneViewport) cutsceneViewport.classList.add("screen-rumble");
+
+            if (engineerBubble) {
+                engineerBubble.classList.add("show");
+                engineerBubble.textContent = "ÄÃƒ KÃCH HOáº T! VÃ€O MÃƒ ÄI LÃŒNH Æ I! ðŸš€âœ¨";
+            }
+
+            // 0.8s sau khi báº¥m nÃºt: Camera Zoom siÃªu thá»±c 3D lao tháº³ng vÃ o mÃ n hÃ¬nh mÃ¡y tÃ­nh!
+            registerTimer(() => {
+                window.soundEngine.playCameraWhoosh();
+                if (cutsceneViewport) cutsceneViewport.classList.add("zooming-into-monitor");
+                if (engineerBubble) engineerBubble.classList.remove("show");
+            }, 800);
+
+            // 2.4s sau khi zoom: Chá»›p sÃ¡ng vÃ  chuyá»ƒn mÆ°á»£t mÃ  sang Cháº·ng 1 Ä‘á»ƒ nháº­p máº­t kháº©u!
+            registerTimer(() => {
+                finishCutscene();
+            }, 2400);
+        }
+
+        // Báº¥m nÃºt SAFETY Ä‘á»ƒ chuyá»ƒn qua mÃ n hÃ¬nh nháº­p mÃ£
+        if (emergencySafetyBtn) {
+            emergencySafetyBtn.onclick = (e) => {
+                e.stopPropagation();
+                triggerSafetyButtonPress();
+            };
+        }
+
+        // 0.3s: Ká»¹ sÆ° báº¯t Ä‘áº§u cháº¡y dá»“n dáº­p vÃ o phÃ²ng Ä‘iá»u khiá»ƒn
         registerTimer(() => {
             if (cutsceneEngineer) cutsceneEngineer.classList.add("running");
             window.soundEngine.playFootsteps(7);
             if (engineerBubble) engineerBubble.classList.add("show");
         }, 300);
 
-        // 2.0s: Kỹ sư chạy tới bàn máy tính
+        // 1.8s: Ká»¹ sÆ° cháº¡y tá»›i bÃ n mÃ¡y tÃ­nh & Má»i gá»i Cáº©m LÃ¬nh báº¥m nÃºt SAFETY!
         registerTimer(() => {
             if (cutsceneEngineer) cutsceneEngineer.classList.add("at-desk");
-            if (engineerBubble) {
-                engineerBubble.textContent = "BẤM NÚT AN TOÀN TRÊN MÁY TÍNH CẨM LÌNH ƠI! 🚨";
+            if (emergencySafetyBtn && !hasTriggeredSafety) {
+                emergencySafetyBtn.classList.add("ready-to-press");
             }
-        }, 2000);
-
-        // 2.3s: Kỹ sư đập sập nút An Toàn khẩn cấp!
-        registerTimer(() => {
-            if (emergencySafetyBtn) emergencySafetyBtn.classList.add("pressed");
-            window.soundEngine.playButtonSlam();
-            if (cutsceneViewport) cutsceneViewport.classList.add("screen-rumble");
-        }, 2300);
-
-        // 3.4s: Camera bắt đầu Zoom siêu thực 3D lao thẳng vào màn hình máy tính!
-        registerTimer(() => {
-            window.soundEngine.playCameraWhoosh();
-            if (cutsceneViewport) cutsceneViewport.classList.add("zooming-into-monitor");
-            if (engineerBubble) engineerBubble.classList.remove("show");
-        }, 3400);
-
-        // 5.2s: Chớp sáng và chuyển mượt mà sang Chặng 1 để nhập mật khẩu!
-        registerTimer(() => {
-            finishCutscene();
-        }, 5200);
+            if (engineerBubble && !hasTriggeredSafety) {
+                engineerBubble.textContent = "Báº¤M NÃšT SAFETY MÃ€U Äá»Ž TRÃŠN BÃ€N ÄI Cáº¨M LÃŒNH! ðŸš¨ðŸ‘‡";
+            }
+        }, 1800);
 
         // Nút bỏ qua nếu muốn vào thẳng
         if (btnSkipCutscene) {
@@ -369,13 +395,38 @@ document.addEventListener("DOMContentLoaded", () => {
     let isSirenMuted = false;
 
     function initStage1() {
+        // Luôn đặt lại trạng thái nguy cấp ban đầu của Lò phản ứng
+        if (warningTitle) {
+            warningTitle.textContent = "LÕI SẮP NỔ TUNG! KÍCH HOẠT NGẮT KHẨN CẤP AZ-5!";
+        }
+        if (hudRad) hudRad.textContent = "15,000 R/h";
+        if (hudTemp) hudTemp.textContent = "3,828 °C";
+        if (hudCountdown) hudCountdown.textContent = "00:45";
+        if (coreSymbol) coreSymbol.innerHTML = "💥";
+        if (reactorFeedback) {
+            reactorFeedback.textContent = "";
+            reactorFeedback.className = "msg-feedback";
+        }
+        if (btnNextStage1) btnNextStage1.style.display = "none";
+
+        if (reactorCard) {
+            reactorCard.classList.remove("safe");
+            reactorCard.classList.add("meltdown-active");
+        }
+
+        pinInputs.forEach(inp => {
+            inp.value = "";
+            inp.classList.remove("filled", "shake");
+            inp.removeAttribute("disabled");
+        });
+
         // Bắt đầu còi hú Chernobyl & Geiger Counter
         if (alarmStrobe) alarmStrobe.classList.add("active");
-        if (reactorCard) reactorCard.classList.add("meltdown-active");
 
         if (!isSirenMuted) {
             window.soundEngine.startMeltdownSiren();
             window.soundEngine.startGeigerCounter();
+            if (sirenStateText) sirenStateText.textContent = "Đang hú dồn dập";
         }
 
         // Bắt đầu đếm ngược tự hủy kịch tính
@@ -386,7 +437,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // Tự động focus ô đầu tiên
         if (pinInputs.length > 0) {
-            pinInputs[0].focus();
+            setTimeout(() => pinInputs[0].focus(), 150);
         }
     }
 
@@ -676,6 +727,10 @@ document.addEventListener("DOMContentLoaded", () => {
     window.addEventListener("resize", resizeWaveform);
 
     function initStage3() {
+        const vinylSticker = document.getElementById("vinyl-sticker");
+        if (vinylSticker && CONFIG.voice && CONFIG.voice.sticker) {
+            vinylSticker.src = CONFIG.voice.sticker;
+        }
         resizeWaveform();
         drawIdleWaveform();
     }
@@ -854,6 +909,7 @@ document.addEventListener("DOMContentLoaded", () => {
             .replace(/&/g, "&amp;")
             .replace(/</g, "&lt;")
             .replace(/>/g, "&gt;")
+            .replace(/  /g, " &nbsp;")
             .replace(/\n/g, "<br>");
     }
 
@@ -869,6 +925,10 @@ document.addEventListener("DOMContentLoaded", () => {
                 reactorCard.classList.remove("safe");
                 reactorCard.classList.add("meltdown-active");
             }
+            if (warningTitle) warningTitle.textContent = "LÕI SẮP NỔ TUNG! KÍCH HOẠT NGẮT KHẨN CẤP AZ-5!";
+            if (hudRad) hudRad.textContent = "15,000 R/h";
+            if (hudTemp) hudTemp.textContent = "3,828 °C";
+            if (hudCountdown) hudCountdown.textContent = "00:45";
             if (coreSymbol) coreSymbol.innerHTML = "💥";
             if (reactorFeedback) {
                 reactorFeedback.textContent = "";
@@ -894,7 +954,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 captionDecline.style.color = "";
             }
 
-            showStage("intro");
+            window.showStage = showStage;
+    showStage("intro");
         });
     }
 
@@ -987,5 +1048,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // Bắt đầu tại Intro
+    window.showStage = showStage;
     showStage("intro");
 });

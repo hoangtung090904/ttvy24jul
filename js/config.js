@@ -43,15 +43,16 @@ const CONFIG = {
 
     // Nội dung bức thư chúc mừng sinh nhật (Chặng 4)
     letter: {
-        title: "Gửi Cẩm Lình - Tuổi 20 Rực Rỡ ✨",
-        content: `Chúc mừng sinh nhật lần thứ 20 của Cẩm Lình! 🎂✨
+        title: "Happy Birthday Cẩm Lình! 🎂✨",
+        content: `Happy Birthday Cẩm Lình! 
+Sinh nhật tuổi 20, tui chúc Lình sẽ luôn vui vẻ, xinh đẹp và hạnh phúc!
 
-Hôm nay là một ngày vô cùng đặc biệt — ngày mà một cô gái đáng yêu, rực rỡ và xinh đẹp nhất thế giới bước sang tuổi 20. 
+Tui mong Cẩm Lình sẽ vượt qua được chuyện cũ, sẽ có ai đó đến và chữa lành mọi tổn thương, chăm sóc và yêu thương bà 🫂
 
-Tuổi 20 là một cột mốc tuyệt đẹp, giống như phản ứng nhiệt hạch vậy: tràn đầy năng lượng, ấm áp và có thể thắp sáng cả một vũ trụ nhỏ. Cảm ơn Lình vì đã luôn xuất hiện với nụ cười rạng rỡ và mang lại nhiều năng lượng tích cực như thế.
+Lình ơi Lình phải luôn tích cực và cười thật tươi nhé! 
 
-Mong rằng tuổi 20 sẽ mang đến cho Lình thật nhiều niềm vui, sự tự tin và mọi điều may mắn nhất. Dù có chuyện gì đi nữa, hãy luôn nhớ rằng Lình luôn là người đặc biệt và xứng đáng nhận được tất cả những điều ngọt ngào nhất trên thế giới này.
+              Cẩm Lình sinh nhật vui vẻ 🎂🫶
 
-Tết này tui về sẽ mang quà tận tay cho Lình như đã hứa nha! Giờ thì hãy tận hưởng một ngày sinh nhật thật hạnh phúc bên những người thân yêu nhé! 💖🐰🌸`
+                          Thương gửi từ Twiez ❤️`
     }
 };
