@@ -1,4 +1,4 @@
-﻿@charset "UTF-8";
+@charset "UTF-8";
 
 /* ==========================================================================
    🌸 THEME STYLING: DỰ ÁN CỨU TRÁI ĐẤT & SINH NHẬT CẨM LÌNH 20 TUỔI 🌸
@@ -1262,6 +1262,13 @@ body {
    RESPONSIVE & MOBILE POLISH
    ========================================================================== */
 @media (max-width: 600px) {
+    .letter-paper {
+        padding: 28px 18px;
+    }
+    .letter-body {
+        font-size: 1.02rem;
+        line-height: 1.82;
+    }
     .glass-card {
         padding: 24px 16px;
         border-radius: 28px;
