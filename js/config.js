@@ -51,8 +51,8 @@ Tui mong Cẩm Lình sẽ vượt qua được chuyện cũ, sẽ có ai đó đ
 
 Lình ơi Lình phải luôn tích cực và cười thật tươi nhé! 
 
-              Cẩm Lình sinh nhật vui vẻ 🎂🫶
+  Cẩm Lình sinh nhật vui vẻ 🎂🫶
 
-                          Thương gửi từ Twiez ❤️`
+      Thương gửi từ Twiez ❤️`
     }
 };

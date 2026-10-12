@@ -1,4 +1,4 @@
-﻿/**
+/**
  * ==========================================================================
  * 🌸 PROJECT: HAPPY BIRTHDAY CẨM LÌNH (20TH BIRTHDAY) - RESCUE EARTH
  * 👨‍💻 DEVELOPED & ARCHITECTED BY: HoangTung24Jul
@@ -284,15 +284,13 @@ document.addEventListener("DOMContentLoaded", () => {
             setTimeout(() => cutsceneStage.classList.add("active"), 30);
         }
 
-        // Reset tráº¡ng thÃ¡i cÃ¡c pháº§n tá»­ cutscene
+        // Reset cutscene elements
         if (cutsceneEngineer) cutsceneEngineer.classList.remove("running", "at-desk");
         if (cutsceneViewport) cutsceneViewport.classList.remove("zooming-into-monitor", "screen-rumble");
-        if (emergencySafetyBtn) {
-            emergencySafetyBtn.classList.remove("pressed", "ready-to-press");
-        }
+        if (emergencySafetyBtn) emergencySafetyBtn.classList.remove("pressed", "ready-to-press");
         if (engineerBubble) {
             engineerBubble.classList.remove("show");
-            engineerBubble.textContent = "BÃO Äá»˜NG Äá»Ž! LÃ’ PHáº¢N á»¨NG QUÃ Táº¢I Rá»’I! ðŸ˜±ðŸ’¥";
+            engineerBubble.textContent = "B\u00C1O \u0110\u1ED8NG \u0110\u1ECE! L\u00D2 PH\u1EA2N \u1EE8NG QU\u00C1 T\u1EA2I R\u1ED2I! \uD83D\uDE31\uD83D\uDCA5";
         }
 
         let hasTriggeredSafety = false;
@@ -311,23 +309,23 @@ document.addEventListener("DOMContentLoaded", () => {
 
             if (engineerBubble) {
                 engineerBubble.classList.add("show");
-                engineerBubble.textContent = "ÄÃƒ KÃCH HOáº T! VÃ€O MÃƒ ÄI LÃŒNH Æ I! ðŸš€âœ¨";
+                engineerBubble.textContent = "\u0110\u00C3 K\u00CDCH HO\u1EA0T! V\u00C0O M\u00C3 \u0110I L\u00CCNH \u01A0I! \uD83D\uDE80\u2728";
             }
 
-            // 0.8s sau khi báº¥m nÃºt: Camera Zoom siÃªu thá»±c 3D lao tháº³ng vÃ o mÃ n hÃ¬nh mÃ¡y tÃ­nh!
+            // 0.8s: Camera zoom into monitor
             registerTimer(() => {
                 window.soundEngine.playCameraWhoosh();
                 if (cutsceneViewport) cutsceneViewport.classList.add("zooming-into-monitor");
                 if (engineerBubble) engineerBubble.classList.remove("show");
             }, 800);
 
-            // 2.4s sau khi zoom: Chá»›p sÃ¡ng vÃ  chuyá»ƒn mÆ°á»£t mÃ  sang Cháº·ng 1 Ä‘á»ƒ nháº­p máº­t kháº©u!
+            // 2.4s: Finish cutscene and transition to Stage 1
             registerTimer(() => {
                 finishCutscene();
             }, 2400);
         }
 
-        // Báº¥m nÃºt SAFETY Ä‘á»ƒ chuyá»ƒn qua mÃ n hÃ¬nh nháº­p mÃ£
+        // Click listener on SAFETY button
         if (emergencySafetyBtn) {
             emergencySafetyBtn.onclick = (e) => {
                 e.stopPropagation();
@@ -335,21 +333,21 @@ document.addEventListener("DOMContentLoaded", () => {
             };
         }
 
-        // 0.3s: Ká»¹ sÆ° báº¯t Ä‘áº§u cháº¡y dá»“n dáº­p vÃ o phÃ²ng Ä‘iá»u khiá»ƒn
+        // 0.3s: Engineer sprints in
         registerTimer(() => {
             if (cutsceneEngineer) cutsceneEngineer.classList.add("running");
             window.soundEngine.playFootsteps(7);
             if (engineerBubble) engineerBubble.classList.add("show");
         }, 300);
 
-        // 1.8s: Ká»¹ sÆ° cháº¡y tá»›i bÃ n mÃ¡y tÃ­nh & Má»i gá»i Cáº©m LÃ¬nh báº¥m nÃºt SAFETY!
+        // 1.8s: Engineer reaches desk and prompts user to press SAFETY
         registerTimer(() => {
             if (cutsceneEngineer) cutsceneEngineer.classList.add("at-desk");
             if (emergencySafetyBtn && !hasTriggeredSafety) {
                 emergencySafetyBtn.classList.add("ready-to-press");
             }
             if (engineerBubble && !hasTriggeredSafety) {
-                engineerBubble.textContent = "Báº¤M NÃšT SAFETY MÃ€U Äá»Ž TRÃŠN BÃ€N ÄI Cáº¨M LÃŒNH! ðŸš¨ðŸ‘‡";
+                engineerBubble.textContent = "B\u1EA4M N\u00DAT SAFETY M\u00C0U \u0110\u1ECE TR\u00CAN B\u00C0N \u0110I C\u1EA8M L\u00CCNH! \uD83D\uDEA8\uD83D\uDC47";
             }
         }, 1800);
 
@@ -954,8 +952,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 captionDecline.style.color = "";
             }
 
-            window.showStage = showStage;
-    showStage("intro");
+            showStage("intro");
         });
     }
 
