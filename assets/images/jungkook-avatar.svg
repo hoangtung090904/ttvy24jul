@@ -1,0 +1,65 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" width="300" height="300">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#E8D5F5"/>
+      <stop offset="50%" stop-color="#FFCCD5"/>
+      <stop offset="100%" stop-color="#CBB4E8"/>
+    </linearGradient>
+    <linearGradient id="skinGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FFF2EE"/>
+      <stop offset="100%" stop-color="#FCE1D8"/>
+    </linearGradient>
+    <linearGradient id="hairGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2D223B"/>
+      <stop offset="100%" stop-color="#4B3264"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background Circle -->
+  <circle cx="150" cy="150" r="145" fill="url(#bgGrad)"/>
+  
+  <!-- Bunny Ears -->
+  <path d="M 105 105 C 80 40, 95 10, 115 15 C 130 20, 130 65, 120 100 Z" fill="#FFF" stroke="#FFCCD5" stroke-width="3"/>
+  <path d="M 107 90 C 95 45, 102 25, 115 28 C 122 32, 122 65, 115 88 Z" fill="#FFB6C1"/>
+
+  <path d="M 195 105 C 220 40, 205 10, 185 15 C 170 20, 170 65, 180 100 Z" fill="#FFF" stroke="#FFCCD5" stroke-width="3"/>
+  <path d="M 193 90 C 205 45, 198 25, 185 28 C 178 32, 178 65, 185 88 Z" fill="#FFB6C1"/>
+
+  <!-- Shoulders & Outfit (Purple Jacket) -->
+  <path d="M 50 290 C 60 210, 100 200, 150 200 C 200 200, 240 210, 250 290 Z" fill="#583C75"/>
+  <path d="M 115 210 L 150 250 L 185 210 Z" fill="#FFF"/>
+
+  <!-- Neck -->
+  <path d="M 125 180 L 125 215 L 175 215 L 175 180 Z" fill="url(#skinGrad)"/>
+
+  <!-- Face -->
+  <ellipse cx="150" cy="155" rx="55" ry="58" fill="url(#skinGrad)"/>
+
+  <!-- Cute Blush -->
+  <ellipse cx="118" cy="168" rx="14" ry="7" fill="#FF8DA1" opacity="0.45"/>
+  <ellipse cx="182" cy="168" rx="14" ry="7" fill="#FF8DA1" opacity="0.45"/>
+
+  <!-- Eyes (Wink & Smile) -->
+  <!-- Left Eye Sparkle -->
+  <ellipse cx="125" cy="150" rx="6" ry="8" fill="#2B1B17"/>
+  <circle cx="127" cy="147" r="2.5" fill="#FFF"/>
+  <!-- Right Eye Wink -->
+  <path d="M 168 152 Q 178 143 186 152" fill="none" stroke="#2B1B17" stroke-width="3.5" stroke-linecap="round"/>
+
+  <!-- Nose -->
+  <path d="M 150 156 Q 152 161 148 163" fill="none" stroke="#E5A69B" stroke-width="2.5" stroke-linecap="round"/>
+
+  <!-- Cute Smile with cute bunny tooth -->
+  <path d="M 140 172 Q 150 182 160 172" fill="none" stroke="#B83A4B" stroke-width="3" stroke-linecap="round"/>
+
+  <!-- Jungkook Styled Hair -->
+  <path d="M 85 140 C 80 85, 130 70, 150 70 C 170 70, 220 85, 215 140 C 200 115, 185 110, 150 110 C 115 110, 100 115, 85 140 Z" fill="url(#hairGrad)"/>
+  <!-- Bangs -->
+  <path d="M 98 120 C 115 138, 130 110, 145 135 C 155 115, 175 135, 195 120 C 185 105, 170 100, 150 100 C 130 100, 115 105, 98 120 Z" fill="url(#hairGrad)"/>
+
+  <!-- Purple Heart & Sparkles -->
+  <g transform="translate(210, 175)">
+    <path d="M 0 5 C -10 -10, -25 5, 0 25 C 25 5, 10 -10, 0 5 Z" fill="#9C27B0"/>
+  </g>
+  <text x="150" y="278" font-family="'Comfortaa', sans-serif" font-size="14" font-weight="bold" fill="#FFF" text-anchor="middle">Jungkook ðŸ°ðŸ’œ</text>
+</svg>

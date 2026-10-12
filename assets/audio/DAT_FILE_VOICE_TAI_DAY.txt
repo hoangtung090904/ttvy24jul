@@ -1,0 +1,4 @@
+﻿HÃ£y copy file ghi Ã¢m giá»ng nÃ³i cá»§a báº¡n vÃ o Ä‘Ã¢y vÃ  Ä‘áº·t tÃªn lÃ :
+voice.mp3
+
+(Náº¿u file cá»§a báº¡n cÃ³ Ä‘uÃ´i .wav hoáº·c .m4a, báº¡n cÃ³ thá»ƒ Ä‘á»•i tÃªn thÃ nh voice.mp3 hoáº·c chá»‰nh trong file js/config.js nhÃ©!)

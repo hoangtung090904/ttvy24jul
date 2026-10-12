@@ -1,0 +1,1753 @@
+@charset "UTF-8";
+
+/* ==========================================================================
+   🌸 THEME STYLING: DỰ ÁN CỨU TRÁI ĐẤT & SINH NHẬT CẨM LÌNH 20 TUỔI 🌸
+   👨‍💻 LEAD DESIGNER & FRONTEND DEVELOPER: HoangTung24Jul
+   🔒 COPYRIGHT (C) 2026 HoangTung24Jul. ALL RIGHTS RESERVED.
+   🎨 Style: Soft Pastel / Cute Science / Kawaii + Chernobyl Meltdown Cinematic
+   ========================================================================== */
+
+:root {
+    --primary-pink: #FF8DA1;
+    --light-pink: #FFB6C1;
+    --soft-pink: #FFC0CB;
+    --pale-pink: #FFE4E1;
+    --cream-white: #FFFDF9;
+    --lavender: #E6E6FA;
+    --soft-purple: #D8BFD8;
+    --deep-purple-pink: #542B38;
+    --dark-rose: #6B3346;
+    --mint-green: #98DBC6;
+    --coral-red: #FF6B8B;
+    --danger-red: #FF1744;
+    --nuclear-amber: #FF9100;
+    --gold: #FFD166;
+    --glass-bg: rgba(255, 255, 255, 0.85);
+    --glass-border: rgba(255, 255, 255, 0.95);
+    --shadow-soft: 0 10px 30px rgba(255, 141, 161, 0.25);
+    --shadow-deep: 0 20px 45px rgba(107, 51, 70, 0.18);
+    --font-main: "Quicksand", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    --font-heading: "Comfortaa", cursive, sans-serif;
+    --font-handwriting: "Dancing Script", cursive, "Caveat", sans-serif;
+    --font-digital: "Orbitron", monospace, sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    font-family: var(--font-main);
+    background: linear-gradient(135deg, #FFE4E1 0%, #FFC0CB 30%, #F5E6FA 65%, #FFE4E1 100%);
+    background-size: 400% 400%;
+    animation: gradientShift 18s ease infinite;
+    min-height: 100vh;
+    overflow-x: hidden;
+    color: var(--deep-purple-pink);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* ==========================================================================
+   CHERNOBYL MELTDOWN ALARM ATMOSPHERE
+   ========================================================================== */
+.alarm-strobe {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 5;
+    background: radial-gradient(circle, rgba(255, 0, 0, 0) 40%, rgba(255, 23, 68, 0.35) 90%);
+}
+
+.alarm-strobe.active {
+    display: block;
+    animation: strobeFlash 0.9s ease-in-out infinite alternate;
+}
+
+@keyframes strobeFlash {
+    0% { opacity: 0.2; }
+    50% { opacity: 0.85; background: radial-gradient(circle, rgba(255, 145, 0, 0.1) 30%, rgba(255, 23, 68, 0.5) 100%); }
+    100% { opacity: 0.3; }
+}
+
+/* Background floating particles & doodles */
+#bg-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 2;
+}
+
+/* Confetti canvas */
+#confetti-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 9999;
+}
+
+/* App container */
+.app-container {
+    position: relative;
+    z-index: 10;
+    width: 100%;
+    max-width: 900px;
+    min-height: 100vh;
+    padding: 24px 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* ==========================================================================
+   STAGE CONTAINERS & TRANSITIONS
+   ========================================================================== */
+.stage {
+    display: none;
+    width: 100%;
+    max-width: 680px;
+    opacity: 0;
+    transform: scale(0.96) translateY(24px);
+    transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.stage.active {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    opacity: 1;
+    transform: scale(1) translateY(0);
+}
+
+/* Glass Card */
+.glass-card {
+    background: var(--glass-bg);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border: 2px solid var(--glass-border);
+    border-radius: 36px;
+    padding: 34px 28px;
+    box-shadow: var(--shadow-soft), var(--shadow-deep);
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+}
+
+/* Cute Buttons */
+.cute-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 1.05rem;
+    padding: 15px 32px;
+    border-radius: 50px;
+    border: none;
+    cursor: pointer;
+    background: linear-gradient(135deg, #FF8DA1, #FF5E7E);
+    color: white;
+    box-shadow: 0 8px 22px rgba(255, 94, 126, 0.38);
+    transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.cute-btn:hover {
+    transform: translateY(-3px) scale(1.04);
+    box-shadow: 0 12px 28px rgba(255, 94, 126, 0.48);
+}
+
+.cute-btn:active {
+    transform: translateY(1px) scale(0.98);
+}
+
+.cute-btn-outline {
+    background: white;
+    color: var(--primary-pink);
+    border: 2px solid var(--light-pink);
+    box-shadow: 0 6px 16px rgba(255, 182, 193, 0.3);
+}
+
+.cute-btn-outline:hover {
+    background: var(--pale-pink);
+}
+
+/* Top utility bar (Ẩn theo yêu cầu) */
+.top-controls {
+    display: none !important;
+}
+
+.icon-btn {
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    background: var(--glass-bg);
+    backdrop-filter: blur(12px);
+    border: 2px solid white;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.icon-btn:hover {
+    transform: scale(1.15) rotate(5deg);
+    background: white;
+}
+
+/* ==========================================================================
+   POPUP MỞ ĐẦU (INTRO SCREEN)
+   ========================================================================== */
+.intro-dialog {
+    max-width: 540px;
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(20px);
+    border-radius: 38px;
+    padding: 40px 32px;
+    text-align: center;
+    border: 3px solid #FFCCD5;
+    position: relative;
+    box-shadow: 0 25px 60px rgba(255, 141, 161, 0.35);
+}
+
+.intro-badge {
+    display: inline-block;
+    padding: 6px 18px;
+    background: #FFE4E1;
+    color: #FF5E7E;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    margin-bottom: 18px;
+    letter-spacing: 1.5px;
+}
+
+.intro-icon-wrap {
+    font-size: 4.2rem;
+    margin-bottom: 16px;
+    animation: floatCute 3s ease-in-out infinite;
+}
+
+@keyframes floatCute {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-8px) rotate(5deg); }
+}
+
+.intro-title {
+    font-family: var(--font-heading);
+    font-size: 1.7rem;
+    color: var(--dark-rose);
+    margin-bottom: 18px;
+}
+
+.intro-quote {
+    background: #FFF5F7;
+    border-radius: 24px;
+    padding: 22px 24px;
+    font-size: 1.15rem;
+    line-height: 1.7;
+    color: #5D2A38;
+    margin-bottom: 26px;
+    border: 2px dashed #FFB6C1;
+    position: relative;
+}
+
+.intro-signature {
+    margin-top: 12px;
+    font-weight: bold;
+    color: #FF5E7E;
+    font-style: italic;
+    font-size: 1.05rem;
+    display: block;
+}
+
+/* ==========================================================================
+   ⚛️ CHẶNG 1: THẢM HỌA HẠT NHÂN CHERNOBYL
+   ========================================================================== */
+.stage-reactor.chernobyl-crisis {
+    border: 4px solid #FF1744;
+    background: rgba(255, 245, 247, 0.94);
+    box-shadow: 0 0 40px rgba(255, 23, 68, 0.4), var(--shadow-deep);
+    transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.stage-reactor.meltdown-active {
+    animation: plantRumble 0.18s infinite alternate;
+}
+
+@keyframes plantRumble {
+    0% { transform: translate(0, 0) rotate(0deg); }
+    25% { transform: translate(-2px, 1px) rotate(-0.3deg); }
+    50% { transform: translate(2px, -1px) rotate(0.3deg); }
+    75% { transform: translate(-1px, -2px) rotate(0deg); }
+    100% { transform: translate(1px, 2px) rotate(-0.2deg); }
+}
+
+.chernobyl-warning-banner {
+    background: repeating-linear-gradient(
+        -45deg,
+        #FF1744,
+        #FF1744 20px,
+        #FFD54F 20px,
+        #FFD54F 40px
+    );
+    color: #1A050B;
+    padding: 12px 14px;
+    font-family: var(--font-digital);
+    font-weight: 900;
+    font-size: 0.92rem;
+    letter-spacing: 1.8px;
+    border-radius: 14px;
+    margin-bottom: 20px;
+    box-shadow: 0 6px 18px rgba(255, 23, 68, 0.45);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    text-shadow: 0 1px 2px rgba(255, 255, 255, 0.6);
+}
+
+.hazard-icon {
+    font-size: 1.4rem;
+    animation: hazardSpin 3s linear infinite;
+}
+
+@keyframes hazardSpin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.reactor-hud-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 22px;
+}
+
+.hud-box {
+    background: #1F101A;
+    border: 2px solid #FF5252;
+    border-radius: 16px;
+    padding: 10px 8px;
+    color: white;
+    text-align: center;
+    box-shadow: inset 0 0 15px rgba(255, 23, 68, 0.35);
+}
+
+.hud-label {
+    font-size: 0.72rem;
+    font-weight: bold;
+    color: #FFB3BA;
+    letter-spacing: 0.5px;
+    margin-bottom: 4px;
+}
+
+.hud-value {
+    font-family: var(--font-digital);
+    font-size: 1.35rem;
+    font-weight: 900;
+    color: #FF1744;
+    text-shadow: 0 0 10px #FF1744;
+}
+
+.hud-value.pulse-text {
+    animation: textBlink 0.6s infinite alternate;
+}
+
+@keyframes textBlink {
+    0% { opacity: 1; transform: scale(1); }
+    100% { opacity: 0.6; transform: scale(1.08); color: #FF9100; text-shadow: 0 0 15px #FF9100; }
+}
+
+.hud-subtext {
+    font-size: 0.65rem;
+    font-weight: bold;
+    color: #FF8A80;
+    margin-top: 4px;
+}
+
+.hud-bar-wrap {
+    width: 100%;
+    height: 6px;
+    background: #331A26;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-top: 6px;
+}
+
+.hud-bar.temp-fill {
+    width: 95%;
+    height: 100%;
+    background: linear-gradient(90deg, #FF9100, #FF1744);
+    animation: barPulse 1s ease-in-out infinite alternate;
+}
+
+@keyframes barPulse {
+    0% { width: 92%; }
+    100% { width: 99%; }
+}
+
+.meltdown-core-wrap {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    margin: 8px auto 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.radiation-pulse-aura {
+    position: absolute;
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255, 23, 68, 0.45) 0%, rgba(255, 145, 0, 0.2) 60%, rgba(255, 0, 0, 0) 80%);
+    animation: radiationPulse 1.2s ease-out infinite;
+}
+
+@keyframes radiationPulse {
+    0% { transform: scale(0.8); opacity: 1; }
+    100% { transform: scale(1.6); opacity: 0; }
+}
+
+.plasma-orbit-ring {
+    position: absolute;
+    width: 190px;
+    height: 70px;
+    border-radius: 50%;
+    border: 3.5px solid #FF1744;
+    box-shadow: 0 0 20px #FF1744, inset 0 0 10px #FF5252;
+}
+
+.plasma-orbit-ring.ring-1 { transform: rotate(0deg); animation: spinPlasma1 2.2s linear infinite; }
+.plasma-orbit-ring.ring-2 { transform: rotate(60deg); animation: spinPlasma2 2.6s linear infinite; }
+.plasma-orbit-ring.ring-3 { transform: rotate(120deg); animation: spinPlasma3 3s linear infinite; }
+
+@keyframes spinPlasma1 { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+@keyframes spinPlasma2 { 0% { transform: rotate(60deg); } 100% { transform: rotate(420deg); } }
+@keyframes spinPlasma3 { 0% { transform: rotate(120deg); } 100% { transform: rotate(480deg); } }
+
+.atom-nucleus.meltdown-fire-core {
+    width: 96px;
+    height: 96px;
+    border-radius: 50%;
+    background: radial-gradient(circle, #FFFFFF 0%, #FF9100 40%, #FF1744 85%);
+    box-shadow: 0 0 35px #FF1744, 0 0 70px #FF5252, inset 0 0 20px #FFF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 10;
+    animation: nuclearHeartbeat 0.7s ease-in-out infinite alternate;
+}
+
+@keyframes nuclearHeartbeat {
+    0% { transform: scale(0.96); filter: drop-shadow(0 0 10px #FF1744); }
+    100% { transform: scale(1.18); filter: drop-shadow(0 0 35px #FF1744) brightness(1.2); }
+}
+
+.core-symbol {
+    font-size: 2.8rem;
+    animation: symbolShake 0.4s infinite alternate;
+}
+
+@keyframes symbolShake {
+    0% { transform: rotate(-5deg) scale(0.95); }
+    100% { transform: rotate(5deg) scale(1.1); }
+}
+
+.electric-arc {
+    position: absolute;
+    font-size: 1.6rem;
+    color: #FFD54F;
+    text-shadow: 0 0 10px #FFD54F;
+    animation: zapFlicker 0.4s infinite alternate;
+    pointer-events: none;
+    z-index: 15;
+}
+
+.arc-top { top: -5px; }
+.arc-bottom { bottom: -5px; }
+.arc-left { left: 0; }
+.arc-right { right: 0; }
+
+@keyframes zapFlicker {
+    0% { opacity: 0; transform: scale(0.7); }
+    50% { opacity: 1; transform: scale(1.3); }
+    100% { opacity: 0.3; transform: scale(0.9); }
+}
+
+.chernobyl-title {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    font-weight: 900;
+    color: #D50000;
+    margin-bottom: 12px;
+    text-shadow: 0 0 12px rgba(255, 23, 68, 0.4);
+    letter-spacing: 0.5px;
+}
+
+.chernobyl-hint {
+    font-size: 1.02rem;
+    color: #4A1521;
+    margin-bottom: 22px;
+    background: rgba(255, 235, 238, 0.95);
+    border: 2px dashed #FF5252;
+    padding: 12px 18px;
+    border-radius: 18px;
+    display: inline-block;
+}
+
+.pin-nuclear {
+    width: 50px;
+    height: 60px;
+    border-radius: 14px;
+    border: 2.5px solid #FF5252;
+    background: #FFF0F2;
+    font-family: var(--font-digital);
+    font-size: 1.9rem;
+    font-weight: 900;
+    color: #D50000;
+    box-shadow: 0 4px 14px rgba(255, 23, 68, 0.25);
+    transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.pin-nuclear:focus {
+    border-color: #D50000;
+    background: #FFFFFF;
+    box-shadow: 0 0 0 5px rgba(255, 23, 68, 0.35);
+    transform: translateY(-4px) scale(1.08);
+}
+
+.pin-nuclear.filled {
+    background: #FFCDD2;
+    border-color: #D50000;
+    color: #B71C1C;
+}
+
+.siren-control-wrap {
+    margin-bottom: 16px;
+}
+
+/* KHI GIẢI CỨU THÀNH CÔNG */
+.stage-reactor.safe {
+    border-color: #4CAF50 !important;
+    background: rgba(241, 248, 233, 0.96) !important;
+    box-shadow: 0 0 50px rgba(76, 175, 80, 0.4) !important;
+    animation: none !important;
+}
+
+.stage-reactor.safe .chernobyl-warning-banner {
+    background: linear-gradient(90deg, #4CAF50, #81C784) !important;
+    color: white !important;
+    box-shadow: 0 6px 18px rgba(76, 175, 80, 0.4) !important;
+}
+
+.stage-reactor.safe .hud-box {
+    border-color: #4CAF50 !important;
+    background: #0F2414 !important;
+}
+
+.stage-reactor.safe .hud-value {
+    color: #69F0AE !important;
+    text-shadow: 0 0 10px #69F0AE !important;
+    animation: none !important;
+}
+
+.stage-reactor.safe .hud-bar.temp-fill {
+    width: 15% !important;
+    background: #69F0AE !important;
+    animation: none !important;
+}
+
+.stage-reactor.safe .atom-nucleus {
+    background: radial-gradient(circle, #E1F5FE, #81D4FA 60%, #4CAF50 100%) !important;
+    box-shadow: 0 0 40px #81C784, 0 0 70px #A5D6A7 !important;
+    animation: celebrateEarth 2.5s ease-in-out infinite !important;
+}
+
+.stage-reactor.safe .plasma-orbit-ring {
+    border-color: #81C784 !important;
+    box-shadow: 0 0 20px #81C784 !important;
+}
+
+.stage-reactor.safe .electric-arc {
+    display: none !important;
+}
+
+.stage-reactor.safe .chernobyl-title {
+    color: #2E7D32 !important;
+}
+
+.stage-reactor.safe .chernobyl-hint {
+    background: #E8F5E9 !important;
+    border-color: #81C784 !important;
+    color: #1B5E20 !important;
+}
+
+.btn-victory-next {
+    background: linear-gradient(135deg, #4CAF50, #2E7D32) !important;
+    box-shadow: 0 10px 30px rgba(76, 175, 80, 0.5) !important;
+    font-size: 1.15rem !important;
+    padding: 16px 36px !important;
+    animation: pulseVictory 1.4s infinite !important;
+}
+
+@keyframes pulseVictory {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.06); }
+}
+
+/* ==========================================================================
+   CHẶNG 2: CUỘC GỌI GIẢI CỨU TỪ JUNGKOOK (FAKE FACETIME)
+   ========================================================================== */
+.phone-chassis {
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+    background: #1C1924;
+    border-radius: 46px;
+    border: 6px solid #FFDDE2;
+    box-shadow: 0 25px 65px rgba(84, 43, 56, 0.38);
+    overflow: hidden;
+    position: relative;
+    aspect-ratio: 9 / 17;
+    max-height: 680px;
+    display: flex;
+    flex-direction: column;
+}
+
+.phone-notch {
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 110px;
+    height: 26px;
+    background: #000;
+    border-radius: 20px;
+    z-index: 50;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 12px;
+}
+
+.camera-lens {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #112233;
+    border: 1px solid #334455;
+}
+
+.call-screen {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 60px 24px 40px;
+    position: relative;
+    background: linear-gradient(180deg, #2D1B2D 0%, #170E1C 100%);
+    color: white;
+}
+
+.caller-info {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.avatar-wrapper {
+    position: relative;
+    width: 125px;
+    height: 125px;
+    margin: 0 auto 16px;
+}
+
+.caller-avatar {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid #FFB6C1;
+    box-shadow: 0 0 25px rgba(255, 182, 193, 0.4);
+}
+
+.avatar-pulse {
+    position: absolute;
+    top: -8px;
+    left: -8px;
+    right: -8px;
+    bottom: -8px;
+    border-radius: 50%;
+    border: 2px solid #FF8DA1;
+    animation: ripplePulse 1.8s ease-out infinite;
+}
+
+@keyframes ripplePulse {
+    0% { transform: scale(1); opacity: 0.8; }
+    100% { transform: scale(1.35); opacity: 0; }
+}
+
+.caller-name {
+    font-family: var(--font-heading);
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: #FFF;
+    margin-bottom: 6px;
+}
+
+.caller-status {
+    font-size: 0.95rem;
+    color: #D8BFD8;
+}
+
+/* Call actions container */
+.call-actions {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-bottom: 24px;
+    position: relative;
+    min-height: 110px;
+}
+
+.call-btn-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    position: relative;
+}
+
+.wrap-decline {
+    position: relative;
+    transition: all 0.28s cubic-bezier(0.34, 1.56, 0.64, 1);
+    z-index: 20;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+.wrap-accept {
+    position: relative;
+    z-index: 25;
+}
+
+.call-btn {
+    width: 66px;
+    height: 66px;
+    border-radius: 50%;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    cursor: pointer;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+    transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.btn-accept {
+    background: #4CD964;
+    color: white;
+    animation: bounceCall 1.2s infinite;
+}
+
+@keyframes bounceCall {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+
+.btn-decline {
+    background: #FF3B30;
+    color: white;
+}
+
+.btn-caption {
+    font-size: 0.85rem;
+    color: #E6E6FA;
+    font-weight: 600;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+    white-space: nowrap;
+    text-align: center;
+    transition: all 0.2s ease;
+}
+
+/* In-Call Active Video Screen */
+.in-call-screen {
+    display: none;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: #000;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow: hidden;
+}
+
+.in-call-screen.active {
+    display: flex;
+}
+
+.video-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.video-media {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 50% 12%;
+    transition: transform 0.5s ease;
+}
+
+.in-call-screen.active .video-media {
+    animation: liveCamDrift 7s ease-in-out infinite alternate;
+}
+
+@keyframes liveCamDrift {
+    0% { transform: scale(1) translateY(0); }
+    50% { transform: scale(1.04) translateY(-4px); }
+    100% { transform: scale(1.02) translateY(2px); }
+}
+
+.call-overlay {
+    position: relative;
+    z-index: 10;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 50px 16px 24px;
+    background: linear-gradient(180deg, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0) 30%, rgba(0,0,0,0.8) 100%);
+}
+
+.call-header-mini {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+}
+
+.call-timer {
+    background: rgba(0, 0, 0, 0.45);
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-size: 0.85rem;
+    font-family: monospace;
+}
+
+/* Vietsub Bubble */
+.subtitle-box {
+    background: rgba(255, 255, 255, 0.94);
+    backdrop-filter: blur(12px);
+    border-radius: 20px;
+    padding: 16px 18px;
+    margin-bottom: 14px;
+    border: 2px solid #FFB6C1;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.35);
+    text-align: left;
+}
+
+.subtitle-badge {
+    font-size: 0.78rem;
+    font-weight: bold;
+    color: #FF5E7E;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 6px;
+    display: block;
+}
+
+.subtitle-text {
+    font-size: 0.96rem;
+    line-height: 1.55;
+    color: #3C1E28;
+    min-height: 48px;
+    font-weight: 600;
+}
+
+/* ==========================================================================
+   CHẶNG 3: BẢN THU ÂM ÂM THANH BÍ MẬT (MÁY ĐĨA THAN / CASSETTE)
+   ========================================================================== */
+.turntable-card {
+    background: linear-gradient(145deg, #FFF0F3 0%, #FBE4EC 100%);
+    border: 3px solid #FFCCD5;
+    border-radius: 40px;
+    padding: 32px 26px;
+    position: relative;
+    box-shadow: var(--shadow-deep);
+}
+
+.turntable-body {
+    position: relative;
+    width: 270px;
+    height: 270px;
+    margin: 10px auto 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.vinyl-record {
+    width: 240px;
+    height: 240px;
+    border-radius: 50%;
+    background: radial-gradient(circle, #33222B 0%, #1A0D15 65%, #33222B 100%);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35), inset 0 0 0 12px #261621;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.5s ease;
+}
+
+.vinyl-record.spinning {
+    animation: rotateVinyl 4s linear infinite;
+}
+
+@keyframes rotateVinyl {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.vinyl-grooves {
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    border: 1px dashed rgba(255, 255, 255, 0.15);
+    box-shadow: 
+        0 0 0 10px rgba(255, 255, 255, 0.04),
+        0 0 0 25px rgba(255, 255, 255, 0.04),
+        0 0 0 45px rgba(255, 255, 255, 0.04);
+}
+
+.vinyl-center {
+    width: 95px;
+    height: 95px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #FFB6C1, #FFE4E1);
+    border: 4px solid #FFF;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 12px rgba(0,0,0,0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+.vinyl-center img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.vinyl-center .vinyl-spindle {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: #FFF;
+    position: absolute;
+    box-shadow: inset 0 0 4px rgba(0,0,0,0.5);
+}
+
+.tonearm {
+    position: absolute;
+    top: 15px;
+    right: 5px;
+    width: 70px;
+    height: 140px;
+    pointer-events: none;
+    transform-origin: 50px 20px;
+    transform: rotate(-35deg);
+    transition: transform 1s cubic-bezier(0.34, 1.56, 0.64, 1);
+    z-index: 20;
+}
+
+.tonearm.playing {
+    transform: rotate(5deg);
+}
+
+.tonearm-base {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: #E0C3C9;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+.tonearm-stick {
+    position: absolute;
+    top: 20px;
+    right: 18px;
+    width: 6px;
+    height: 100px;
+    background: linear-gradient(to right, #D8BFD8, #C4A4BE);
+    border-radius: 3px;
+    transform: rotate(-15deg);
+}
+
+.tonearm-head {
+    position: absolute;
+    bottom: 10px;
+    right: 40px;
+    width: 18px;
+    height: 28px;
+    background: #FF8DA1;
+    border-radius: 4px;
+}
+
+.waveform-box {
+    width: 100%;
+    height: 75px;
+    background: rgba(255, 255, 255, 0.75);
+    border-radius: 20px;
+    margin: 15px 0;
+    overflow: hidden;
+    position: relative;
+    border: 2px solid #FFDDE2;
+}
+
+#waveform-canvas {
+    width: 100%;
+    height: 100%;
+}
+
+.heart-play-btn {
+    width: 82px;
+    height: 82px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #FF6584, #FF8DA1);
+    border: 4px solid white;
+    color: white;
+    font-size: 2.1rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 10px 25px rgba(255, 101, 132, 0.45);
+    transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+    margin-top: 10px;
+}
+
+.heart-play-btn:hover {
+    transform: scale(1.1);
+}
+
+.heart-play-btn:active {
+    transform: scale(0.95);
+}
+
+/* ==========================================================================
+   CHẶNG 4: MÓN QUÀ TỪ TWIEZ (THƯ CHÚC MỪNG SINH NHẬT)
+   ========================================================================== */
+.letter-wrapper {
+    position: relative;
+    width: 100%;
+    perspective: 1000px;
+}
+
+.letter-paper {
+    background: #FFFDF9;
+    border-radius: 30px;
+    padding: 40px 32px;
+    box-shadow: 0 15px 45px rgba(107, 51, 70, 0.18), inset 0 0 45px rgba(255, 230, 235, 0.5);
+    border: 2px solid #FFCCD5;
+    position: relative;
+    text-align: left;
+    overflow: hidden;
+}
+
+.letter-stamp {
+    position: absolute;
+    top: 25px;
+    right: 25px;
+    width: 55px;
+    height: 65px;
+    border: 2px dashed #FF8DA1;
+    border-radius: 8px;
+    background: #FFE8ED;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    transform: rotate(8deg);
+}
+
+.letter-stamp span {
+    font-size: 0.65rem;
+    font-weight: bold;
+    color: #FF6584;
+    margin-top: 2px;
+}
+
+.letter-title {
+    font-family: var(--font-heading);
+    font-size: 1.65rem;
+    color: var(--dark-rose);
+    margin-bottom: 22px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.letter-body {
+    font-size: 1.14rem;
+    line-height: 1.88;
+    color: #4A2B35;
+    white-space: pre-wrap;
+    min-height: 220px;
+    position: relative;
+}
+
+.typewriter-cursor {
+    display: inline-block;
+    width: 3px;
+    height: 1.2em;
+    background-color: #FF6584;
+    vertical-align: text-bottom;
+    margin-left: 2px;
+    animation: blinkCursor 0.8s infinite;
+}
+
+@keyframes blinkCursor {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+.letter-footer {
+    margin-top: 30px;
+    text-align: right;
+    font-family: var(--font-handwriting);
+    font-size: 1.9rem;
+    color: #FF5E7E;
+    font-weight: bold;
+}
+
+/* ==========================================================================
+   MODAL CÀI ĐẶT NHANH (QUICK ASSET SELECTOR)
+   ========================================================================== */
+.modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.45);
+    backdrop-filter: blur(8px);
+    z-index: 10000;
+    justify-content: center;
+    align-items: center;
+    padding: 16px;
+}
+
+.modal-overlay.active {
+    display: flex;
+}
+
+.settings-modal {
+    background: white;
+    border-radius: 28px;
+    width: 100%;
+    max-width: 480px;
+    padding: 28px 24px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.25);
+    text-align: left;
+    border: 3px solid #FFCCD5;
+    position: relative;
+}
+
+.settings-modal h3 {
+    font-family: var(--font-heading);
+    color: var(--dark-rose);
+    margin-bottom: 16px;
+    font-size: 1.3rem;
+}
+
+.settings-row {
+    margin-bottom: 14px;
+}
+
+.settings-row label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: bold;
+    color: #555;
+    margin-bottom: 6px;
+}
+
+.settings-row input[type="file"] {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #FFCCD5;
+    border-radius: 10px;
+    background: #FFF9FA;
+    font-size: 0.85rem;
+}
+
+.settings-note {
+    font-size: 0.82rem;
+    color: #888;
+    background: #FFF5F7;
+    padding: 10px 12px;
+    border-radius: 12px;
+    margin-top: 14px;
+    line-height: 1.45;
+}
+
+.modal-close-btn {
+    margin-top: 18px;
+    width: 100%;
+    padding: 12px;
+    border-radius: 20px;
+    border: none;
+    background: var(--primary-pink);
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    font-family: var(--font-heading);
+}
+
+/* ==========================================================================
+   RESPONSIVE & MOBILE POLISH
+   ========================================================================== */
+@media (max-width: 600px) {
+    .glass-card {
+        padding: 24px 16px;
+        border-radius: 28px;
+    }
+    .chernobyl-warning-banner {
+        font-size: 0.78rem;
+        padding: 10px 8px;
+        letter-spacing: 1px;
+    }
+    .reactor-hud-grid {
+        gap: 6px;
+    }
+    .hud-box {
+        padding: 8px 4px;
+    }
+    .hud-value {
+        font-size: 1.05rem;
+    }
+    .pin-input-group {
+        gap: 4px;
+    }
+    .pin-nuclear {
+        width: 38px;
+        height: 50px;
+        font-size: 1.4rem;
+        border-radius: 10px;
+    }
+    .meltdown-core-wrap {
+        width: 170px;
+        height: 170px;
+    }
+    .atom-nucleus.meltdown-fire-core {
+        width: 80px;
+        height: 80px;
+    }
+    .core-symbol {
+        font-size: 2.2rem;
+    }
+    .intro-title, .letter-title {
+        font-size: 1.35rem;
+    }
+    .intro-quote {
+        font-size: 1.02rem;
+        padding: 16px;
+    }
+    .phone-chassis {
+        max-width: 340px;
+    }
+    .turntable-body {
+        width: 220px;
+        height: 220px;
+    }
+    .vinyl-record {
+        width: 200px;
+        height: 200px;
+    }
+    .vinyl-grooves {
+        width: 170px;
+        height: 170px;
+    }
+    .vinyl-center {
+        width: 80px;
+        height: 80px;
+    }
+}
+
+/* ==========================================================================
+   🎬 ĐOẠN PHIM MÔ PHỎNG: PHÒNG ĐIỀU KHIỂN CHERNOBYL & ZOOM MÁY TÍNH
+   ========================================================================== */
+.stage-cutscene {
+    display: none;
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
+    background: #0B0408;
+    z-index: 999;
+    overflow: hidden;
+    perspective: 1200px;
+    align-items: center;
+    justify-content: center;
+}
+
+.stage-cutscene.active {
+    display: flex;
+}
+
+.cutscene-viewport {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    transform-origin: 50% 68%;
+    transition: transform 1.8s cubic-bezier(0.7, 0, 0.2, 1), filter 1.2s ease;
+    will-change: transform;
+}
+
+/* Khi Zoom camera lao thẳng vào màn hình máy tính */
+.cutscene-viewport.zooming-into-monitor {
+    transform: scale(7.5) translateY(18vh);
+    filter: brightness(1.35) contrast(1.15);
+}
+
+.cutscene-viewport.screen-rumble {
+    animation: screenRumble 0.35s ease-in-out;
+}
+
+@keyframes screenRumble {
+    0%, 100% { transform: translate(0, 0); }
+    20% { transform: translate(-8px, 6px); }
+    40% { transform: translate(8px, -5px); }
+    60% { transform: translate(-5px, -6px); }
+    80% { transform: translate(6px, 4px); }
+}
+
+/* Nền phòng điều khiển hạt nhân Chernobyl */
+.control-room-bg {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 50% 30%, #2D0917 0%, #17060F 60%, #080205 100%);
+    overflow: hidden;
+}
+
+.hazard-wall-stripes {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 42px;
+    background: repeating-linear-gradient(
+        -45deg,
+        #FFD166,
+        #FFD166 22px,
+        #1A1A1A 22px,
+        #1A1A1A 44px
+    );
+    box-shadow: 0 -4px 18px rgba(0, 0, 0, 0.65);
+}
+
+/* Cửa sổ nhìn ra lò phản ứng No. 4 đang quá tải bùng nổ dữ dội */
+.reactor-window {
+    position: absolute;
+    top: 5vh;
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(88vw, 700px);
+    height: 38vh;
+    border-radius: 26px;
+    border: 8px solid #3A1B28;
+    background: #000;
+    overflow: hidden;
+    box-shadow: 0 0 60px rgba(255, 23, 68, 0.55), inset 0 0 50px rgba(255, 23, 68, 0.7);
+}
+
+.burning-core-view {
+    position: absolute;
+    inset: -20px;
+    background: radial-gradient(circle at 50% 85%, #FFF 0%, #FFE082 15%, #FF9100 35%, #FF1744 65%, #210008 100%);
+    filter: blur(2px);
+    animation: coreMeltdownPulse 1s ease-in-out infinite alternate;
+}
+
+@keyframes coreMeltdownPulse {
+    0% {
+        transform: scale(1) translateY(0);
+        filter: brightness(1) drop-shadow(0 0 25px #FF1744);
+    }
+    100% {
+        transform: scale(1.08) translateY(-12px);
+        filter: brightness(1.45) drop-shadow(0 0 55px #FF9100);
+    }
+}
+
+.smoke-particles {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 50% 100%, rgba(255, 255, 255, 0.12) 0%, transparent 75%);
+    mix-blend-mode: screen;
+}
+
+/* Còi báo động đỏ xoay quét ánh sáng trần nhà */
+.overhead-siren-light {
+    position: absolute;
+    top: -120px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 260px;
+    height: 260px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255, 23, 68, 0.95) 0%, rgba(255, 23, 68, 0) 70%);
+    animation: sirenPulse 0.8s ease-in-out infinite alternate;
+    pointer-events: none;
+}
+
+@keyframes sirenPulse {
+    0% { transform: translateX(-50%) scale(0.9); opacity: 0.35; }
+    100% { transform: translateX(-50%) scale(2.6); opacity: 1; filter: drop-shadow(0 0 70px #FF1744); }
+}
+
+/* Kỹ sư áo vàng chạy hớt hải */
+.cutscene-engineer {
+    position: absolute;
+    bottom: 110px;
+    left: -180px;
+    z-index: 30;
+    transition: transform 0.1s ease;
+    will-change: left, transform;
+}
+
+.cutscene-engineer.running {
+    animation: engineerSprint 1.8s cubic-bezier(0.2, 0.8, 0.4, 1) forwards;
+}
+
+@keyframes engineerSprint {
+    0% {
+        left: -180px;
+        transform: translateY(0);
+    }
+    15% { transform: translateY(-14px); }
+    30% { transform: translateY(0); }
+    45% { transform: translateY(-14px); }
+    60% { transform: translateY(0); }
+    75% { transform: translateY(-10px); }
+    90% { transform: translateY(0); }
+    100% {
+        left: calc(50% - 210px);
+        transform: translateY(0);
+    }
+}
+
+.cutscene-engineer .running-legs line:first-child {
+    animation: legLeft 0.22s infinite alternate ease-in-out;
+    transform-origin: 45px 120px;
+}
+.cutscene-engineer .running-legs line:last-child {
+    animation: legRight 0.22s infinite alternate ease-in-out;
+    transform-origin: 75px 120px;
+}
+
+@keyframes legLeft {
+    0% { transform: rotate(-28deg); }
+    100% { transform: rotate(32deg); }
+}
+@keyframes legRight {
+    0% { transform: rotate(32deg); }
+    100% { transform: rotate(-28deg); }
+}
+
+.cutscene-engineer.at-desk .running-legs line {
+    animation: none !important;
+}
+
+/* Bong bóng thoại của Kỹ Sư */
+.engineer-speech-bubble {
+    position: absolute;
+    top: -85px;
+    left: -35px;
+    background: #FFF;
+    color: #C2185B;
+    border: 3px solid #FF8DA1;
+    border-radius: 20px;
+    padding: 10px 18px;
+    font-size: 0.95rem;
+    font-weight: 700;
+    font-family: var(--font-heading);
+    white-space: nowrap;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.45);
+    opacity: 0;
+    transform: scale(0.6) translateY(20px);
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    pointer-events: none;
+    z-index: 50;
+}
+
+.engineer-speech-bubble::after {
+    content: "";
+    position: absolute;
+    bottom: -10px;
+    left: 48px;
+    border-width: 10px 10px 0;
+    border-style: solid;
+    border-color: #FFF transparent;
+    display: block;
+    width: 0;
+}
+
+.engineer-speech-bubble.show {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+}
+
+/* Bàn điều khiển & Máy tính */
+.desk-terminal-wrap {
+    position: absolute;
+    bottom: 25px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 20;
+}
+
+/* Chiếc bàn thép công nghiệp */
+.control-desk {
+    position: relative;
+    width: min(92vw, 560px);
+    height: 110px;
+    background: linear-gradient(180deg, #37474F 0%, #263238 60%, #1A2226 100%);
+    border-top: 6px solid #546E7A;
+    border-radius: 18px 18px 0 0;
+    box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding-left: 50px;
+}
+
+/* Nút bấm an toàn khẩn cấp (Emergency Safety AZ-5) */
+.emergency-safety-button {
+    position: relative;
+    width: 76px;
+    height: 76px;
+    border-radius: 50%;
+    background: radial-gradient(circle, #FF5252 0%, #D50000 70%, #8B0000 100%);
+    border: 5px solid #FFD54F;
+    box-shadow: 0 0 25px #FF1744, 0 10px 20px rgba(0, 0, 0, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.15s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+    animation: safetyBtnGlow 1.2s infinite alternate;
+}
+
+@keyframes safetyBtnGlow {
+    0% { box-shadow: 0 0 15px #FF1744, 0 8px 15px rgba(0, 0, 0, 0.6); }
+    100% { box-shadow: 0 0 35px #FF5252, 0 10px 25px rgba(255, 23, 68, 0.8); }
+}
+
+.emergency-safety-button .btn-cap {
+    font-size: 0.75rem;
+    font-weight: 900;
+    color: #FFF;
+    letter-spacing: 1px;
+    font-family: var(--font-digital);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+.emergency-safety-button.pressed {
+    transform: translateY(12px) scale(0.92);
+    box-shadow: 0 0 60px #FF1744, 0 2px 10px rgba(0, 0, 0, 0.9);
+    filter: brightness(1.4);
+}
+
+/* Chiếc máy tính CRT cổ điển / Terminal giám sát */
+.pc-monitor-unit {
+    position: absolute;
+    bottom: 85px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 25;
+}
+
+.monitor-frame {
+    width: 320px;
+    height: 230px;
+    background: #ECEFF1;
+    border: 8px solid #CFD8DC;
+    border-radius: 20px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6), inset 0 2px 4px rgba(255, 255, 255, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.monitor-stand {
+    width: 100px;
+    height: 35px;
+    background: #B0BEC5;
+    border-radius: 0 0 12px 12px;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.5);
+}
+
+.monitor-screen {
+    width: 290px;
+    height: 200px;
+    background: #001008;
+    border-radius: 12px;
+    border: 3px solid #1B5E20;
+    box-shadow: inset 0 0 25px rgba(0, 255, 100, 0.35);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 15px;
+    text-align: center;
+}
+
+.screen-scanlines {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        rgba(18, 16, 16, 0) 50%, 
+        rgba(0, 0, 0, 0.45) 50%
+    );
+    background-size: 100% 4px;
+    pointer-events: none;
+    z-index: 10;
+}
+
+.monitor-loading-text {
+    position: relative;
+    z-index: 5;
+    font-family: var(--font-digital);
+}
+
+.glitch-warning {
+    color: #FF5252;
+    font-size: 0.95rem;
+    font-weight: 900;
+    letter-spacing: 1.5px;
+    margin-bottom: 10px;
+    animation: textFlicker 0.4s infinite alternate;
+}
+
+@keyframes textFlicker {
+    0% { opacity: 0.8; text-shadow: 0 0 4px #FF1744; }
+    100% { opacity: 1; text-shadow: 0 0 15px #FF5252, 0 0 25px #FF1744; }
+}
+
+.pulsing-az5 {
+    color: #69F0AE;
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+    text-shadow: 0 0 10px #00E676;
+    animation: blinkCursor 0.8s infinite;
+}
+
+@keyframes blinkCursor {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+}
+
+/* Nút bỏ qua đoạn phim */
+.btn-skip-cutscene {
+    position: absolute;
+    top: 25px;
+    right: 25px;
+    z-index: 60;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    color: #FFF;
+    padding: 10px 20px;
+    border-radius: 30px;
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 0.9rem;
+    cursor: pointer;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
+    transition: all 0.2s ease;
+}
+
+.btn-skip-cutscene:hover {
+    background: rgba(255, 255, 255, 0.35);
+    transform: scale(1.05);
+}
+
+/* Chớp sáng toàn màn hình chuyển chặng (CRT Flash) */
+.cutscene-white-flash {
+    position: fixed;
+    inset: 0;
+    background: #FFF;
+    z-index: 2000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.35s ease;
+}
+
+.cutscene-white-flash.flash-active {
+    opacity: 1;
+}

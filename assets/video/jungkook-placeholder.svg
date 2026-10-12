@@ -1,0 +1,76 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 450 750" width="450" height="750">
+  <defs>
+    <linearGradient id="screenGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#382647"/>
+      <stop offset="50%" stop-color="#231430"/>
+      <stop offset="100%" stop-color="#150B1E"/>
+    </linearGradient>
+    <linearGradient id="jkGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F2D7EE"/>
+      <stop offset="100%" stop-color="#C9B1E4"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Screen Background -->
+  <rect width="450" height="750" fill="url(#screenGrad)"/>
+
+  <!-- Glowing Heart Aura -->
+  <circle cx="225" cy="340" r="140" fill="#FF6584" opacity="0.15" filter="blur(30px)"/>
+  <circle cx="225" cy="340" r="100" fill="#9C27B0" opacity="0.2" filter="blur(20px)"/>
+
+  <!-- Animated Floating Hearts & Sparkles -->
+  <g fill="#FF8DA1" opacity="0.8">
+    <circle cx="80" cy="180" r="6"/>
+    <circle cx="370" cy="220" r="8"/>
+    <circle cx="90" cy="460" r="7"/>
+    <circle cx="360" cy="480" r="5"/>
+    <path d="M 330 140 C 320 125, 305 140, 330 160 C 355 140, 340 125, 330 140 Z" fill="#E056FD"/>
+    <path d="M 120 280 C 110 265, 95 280, 120 300 C 145 280, 130 265, 120 280 Z" fill="#FF7675"/>
+  </g>
+
+  <!-- Jungkook Character Silhouette / Doodle Holding Mic & Heart -->
+  <g transform="translate(225, 330)">
+    <!-- Body & Hoodie -->
+    <path d="M -90 190 C -70 80, -30 60, 0 60 C 30 60, 70 80, 90 190 Z" fill="#4B3363"/>
+    
+    <!-- Neck -->
+    <rect x="-20" y="25" width="40" height="40" fill="#FCE1D8" rx="8"/>
+
+    <!-- Head -->
+    <ellipse cx="0" cy="0" rx="65" ry="72" fill="#FFF0EA"/>
+
+    <!-- Hair (Jungkook K-pop style) -->
+    <path d="M -75 -15 C -75 -85, -20 -95, 0 -95 C 20 -95, 75 -85, 75 -15 C 60 -45, 30 -50, 0 -50 C -30 -50, -60 -45, -75 -15 Z" fill="#241B2F"/>
+    <path d="M -60 -35 C -40 -10, -20 -35, 0 -15 C 20 -35, 40 -10, 60 -35 C 50 -55, 30 -60, 0 -60 C -30 -60, -50 -55, -60 -35 Z" fill="#241B2F"/>
+
+    <!-- Eyes (Cute smiling crescents) -->
+    <path d="M -38 -2 Q -26 -12 -14 -2" fill="none" stroke="#2B1B17" stroke-width="4.5" stroke-linecap="round"/>
+    <path d="M 14 -2 Q 26 -12 38 -2" fill="none" stroke="#2B1B17" stroke-width="4.5" stroke-linecap="round"/>
+
+    <!-- Blush -->
+    <ellipse cx="-28" cy="14" rx="14" ry="7" fill="#FF8DA1" opacity="0.6"/>
+    <ellipse cx="28" cy="14" rx="14" ry="7" fill="#FF8DA1" opacity="0.6"/>
+
+    <!-- Nose & Radiant Smile -->
+    <path d="M 0 3 Q 3 9 -1 11" fill="none" stroke="#E5A69B" stroke-width="2.5" stroke-linecap="round"/>
+    <path d="M -16 24 Q 0 40 16 24" fill="none" stroke="#B83A4B" stroke-width="4" stroke-linecap="round"/>
+
+    <!-- Hand Making Finger Heart ðŸ«° -->
+    <g transform="translate(65, 80)">
+      <circle cx="0" cy="0" r="28" fill="#FCE1D8"/>
+      <!-- Tiny Heart -->
+      <path d="M 0 -22 C -6 -32, -16 -22, 0 -8 C 16 -22, 6 -32, 0 -22 Z" fill="#FF477E"/>
+    </g>
+
+    <!-- Microphone ðŸŽ¤ -->
+    <g transform="translate(-70, 75) rotate(-20)">
+      <rect x="-8" y="10" width="16" height="40" rx="4" fill="#333"/>
+      <circle cx="0" cy="5" r="16" fill="#888"/>
+      <circle cx="0" cy="5" r="13" fill="#B388FF"/>
+    </g>
+  </g>
+
+  <!-- Overlay Badge -->
+  <rect x="85" y="580" width="280" height="44" rx="22" fill="rgba(255,255,255,0.18)" stroke="rgba(255,255,255,0.4)" stroke-width="1.5"/>
+  <text x="225" y="608" font-family="'Comfortaa', sans-serif" font-size="14" font-weight="bold" fill="#FFF" text-anchor="middle">ðŸ° JK: "Happy Birthday Cáº©m LÃ¬nh! ðŸ’œ"</text>
+</svg>
