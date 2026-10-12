@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<!--
+    ==========================================================================
+    🌸 DỰ ÁN: CHÚC MỪNG SINH NHẬT CẨM LÌNH (TUỔI 20) - GIẢI CỨU TRÁI ĐẤT 🌸
+    👨‍💻 TÁC GIẢ & LẬP TRÌNH VIÊN: HoangTung24Jul
+    🔒 BẢN QUYỀN MÃ NGUỒN: (C) 2026 HoangTung24Jul. TẤT CẢ QUYỀN ĐƯỢC BẢO LƯU.
+    ⭐ Mọi chi tiết kiến trúc, logic kịch bản & giao diện thuộc về: HoangTung24Jul
+    ==========================================================================
+-->
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chúc Mừng Sinh Nhật Cẩm Lình 20 Tuổi 🎂✨ - Dự Án Giải Cứu Trái Đất</title>
+    <meta name="description" content="Website chúc mừng sinh nhật tuổi 20 cực kỳ ngọt ngào dành tặng cho Cẩm Lình từ Twiez!">
+    <meta name="author" content="HoangTung24Jul">
+    <meta name="creator" content="HoangTung24Jul">
+    <meta name="publisher" content="HoangTung24Jul">
+    <meta name="copyright" content="HoangTung24Jul">
+    
+    <!-- Google Fonts: Quicksand, Comfortaa, Dancing Script, Orbitron -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@500;700;900&family=Dancing+Script:wght@700&family=Quicksand:wght@500;600;700;800&family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
+    
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- Ambient Chernobyl Meltdown Strobe Flash (Khẩn cấp) -->
+    <div id="alarm-strobe" class="alarm-strobe"></div>
+
+    <!-- Background Canvas for Floating Doodles & Particles -->
+    <canvas id="bg-canvas"></canvas>
+
+    <!-- Confetti Fireworks Canvas -->
+    <canvas id="confetti-canvas"></canvas>
+
+    <!-- Top floating utilities (Ẩn theo yêu cầu) -->
+    <div class="top-controls" style="display: none;">
+        <button id="btn-custom-files" class="icon-btn" title="Cài đặt ảnh & voice nhanh">
+            ⚙️
+        </button>
+        <button id="btn-sound-toggle" class="icon-btn" title="Bật/Tắt Còi & Âm thanh" onclick="window.toggleNuclearAlarm()">
+            🚨
+        </button>
+    </div>
+
+    <!-- Quick Asset Settings Modal -->
+    <div id="settings-modal" class="modal-overlay">
+        <div class="settings-modal">
+            <h3>⚙️ Tùy Chỉnh Ảnh & Voice Nhanh</h3>
+            <p style="font-size: 0.85rem; color: #666; margin-bottom: 14px;">
+                Bạn có thể chọn file trực tiếp từ máy để xem thử ngay, hoặc chép file vào thư mục <code>assets/</code> theo hướng dẫn!
+            </p>
+
+            <div class="settings-row">
+                <label>🎙️ Chọn file Voice chúc mừng (.m4a, .mp3, .wav):</label>
+                <input type="file" id="input-custom-voice" accept="audio/*">
+            </div>
+
+            <div class="settings-row">
+                <label>🐰 Chọn ảnh đại diện Jungkook:</label>
+                <input type="file" id="input-custom-avatar" accept="image/*">
+            </div>
+
+            <div class="settings-row">
+                <label>🎬 Chọn Video / GIF Jungkook khi nghe máy:</label>
+                <input type="file" id="input-custom-video" accept="image/*,video/*">
+            </div>
+
+            <div class="settings-row">
+                <label>🌸 Chọn ảnh Sticker đĩa than (Chặng 3):</label>
+                <input type="file" id="input-custom-sticker" accept="image/*">
+            </div>
+
+            <div class="settings-note">
+                💡 <strong>Đã nạp sẵn tài liệu từ D:\tung\talieu:</strong><br>
+                - Voice: <code>vy.m4a</code><br>
+                - Ảnh Jungkook gọi đến: <code>anh2.jpg</code><br>
+                - Video/GIF Jungkook: <code>anh1.jpg</code>
+            </div>
+
+            <button id="btn-close-modal" class="modal-close-btn">
+                Hoàn tất & Đóng ✨
+            </button>
+        </div>
+    </div>
+
+    <!-- Main Container -->
+    <main class="app-container">
+
+        <!-- =======================================================
+             POPUP MỞ ĐẦU (TRƯỚC KHI VÀO ĐOẠN PHIM)
+             ======================================================= -->
+        <section id="stage-intro" class="stage active">
+            <div class="intro-dialog">
+                <span class="intro-badge">💌 TIN NHẮN TỪ TWIEZ</span>
+                <div class="intro-icon-wrap">🎁</div>
+                <h1 class="intro-title">Chào Cẩm Lình Nhé! 🌸</h1>
+                <div class="intro-quote">
+                    "Tui muốn tự tay tặng quà cho Lình nên Lình đợi tui Tết về rồi nhận nhe, hiện tại tui có bất ngờ dành cho bà 😘"
+                    <span class="intro-signature">— Twiez gửi gắm 💖 —</span>
+                </div>
+                <button id="btn-start-intro" class="cute-btn">
+                    Khám phá bất ngờ ngay ✨
+                </button>
+            </div>
+        </section>
+
+        <!-- =======================================================
+             🎬 ĐOẠN PHIM MÔ PHỎNG: PHÒNG ĐIỀU KHIỂN CHERNOBYL & ZOOM MÁY TÍNH
+             ======================================================= -->
+        <section id="stage-cutscene" class="stage-cutscene">
+            <div class="cutscene-viewport">
+                <!-- Nền phòng điều khiển hạt nhân & cửa sổ nhìn thấy lò phản ứng quá tải -->
+                <div class="control-room-bg">
+                    <div class="reactor-window">
+                        <div class="burning-core-view"></div>
+                        <div class="smoke-particles"></div>
+                    </div>
+                    <div class="overhead-siren-light"></div>
+                    <div class="hazard-wall-stripes"></div>
+                </div>
+
+                <!-- Nhân vật kỹ sư áo bảo hộ hớt hải chạy vào -->
+                <div id="cutscene-engineer" class="cutscene-engineer">
+                    <div class="engineer-speech-bubble" id="engineer-bubble">
+                        "BÁO ĐỘNG ĐỎ! LÒ PHẢN ỨNG QUÁ TẢI RỒI! 😱💥"
+                    </div>
+                    <!-- Cute Hazmat Engineer SVG -->
+                    <svg class="engineer-svg" viewBox="0 0 120 160" width="120" height="160">
+                        <defs>
+                            <linearGradient id="hazmatGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#FFE082"/>
+                                <stop offset="100%" stop-color="#FFB300"/>
+                            </linearGradient>
+                        </defs>
+                        <!-- Legs running -->
+                        <g class="running-legs">
+                            <line x1="45" y1="120" x2="30" y2="155" stroke="#FFA000" stroke-width="12" stroke-linecap="round"/>
+                            <line x1="75" y1="120" x2="90" y2="150" stroke="#FF8F00" stroke-width="12" stroke-linecap="round"/>
+                        </g>
+                        <!-- Body in Hazmat Suit -->
+                        <rect x="30" y="65" width="60" height="60" rx="20" fill="url(#hazmatGrad)"/>
+                        <circle cx="60" cy="95" r="12" fill="#E65100"/>
+                        <text x="60" y="100" font-size="12" text-anchor="middle" fill="#FFF">☢️</text>
+                        <!-- Helmet with Visor -->
+                        <circle cx="60" cy="45" r="32" fill="#FFF8E1" stroke="#FFA000" stroke-width="5"/>
+                        <ellipse cx="60" cy="45" rx="22" ry="16" fill="#80D8FF" opacity="0.85"/>
+                        <circle cx="55" cy="42" r="3" fill="#FFF"/>
+                        <!-- Arms reaching for computer -->
+                        <path d="M 25 80 Q 5 100 0 115" stroke="#FFA000" stroke-width="10" stroke-linecap="round" fill="none"/>
+                        <path d="M 95 80 Q 115 100 125 110" stroke="#FFA000" stroke-width="10" stroke-linecap="round" fill="none"/>
+                    </svg>
+                </div>
+
+                <!-- Bàn làm việc trung tâm & Chiếc máy tính điều khiển (Nơi camera ZOOM vào!) -->
+                <div id="desk-terminal-wrap" class="desk-terminal-wrap">
+                    <div class="control-desk">
+                        <div class="emergency-safety-button" id="emergency-safety-btn">
+                            <div class="btn-cap">SAFETY</div>
+                        </div>
+                    </div>
+                    <!-- Chiếc máy tính trung tâm (Màn hình sẽ được Camera Zoom In) -->
+                    <div id="pc-monitor-unit" class="pc-monitor-unit">
+                        <div class="monitor-frame">
+                            <div class="monitor-screen" id="monitor-screen-inner">
+                                <div class="screen-scanlines"></div>
+                                <div class="monitor-loading-text">
+                                    <div class="glitch-warning">⚠️ OVERLOAD DETECTED ⚠️</div>
+                                    <div class="pulsing-az5">KÍCH HOẠT MÃ AN TOÀN AZ-5...</div>
+                                </div>
+                            </div>
+                            <div class="monitor-stand"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Nút bỏ qua đoạn phim -->
+                <button id="btn-skip-cutscene" class="btn-skip-cutscene">
+                    Bỏ qua đoạn phim ⏩
+                </button>
+
+                <!-- Lớp chớp sáng CRT khi phóng to vào màn hình máy tính -->
+                <div id="cutscene-white-flash" class="cutscene-white-flash"></div>
+            </div>
+        </section>
+
+        <!-- =======================================================
+             ⚛️ CHẶNG 1: MÀN HÌNH BÙNG NỔ HẠT NHÂN CHERNOBYL (SAU KHI ZOOM MÁY TÍNH)
+             ======================================================= -->
+        <section id="stage-1" class="stage">
+            <div id="reactor-card" class="glass-card stage-reactor chernobyl-crisis">
+                
+                <!-- Băng rào cảnh báo thảm họa chéo sọc nguy cấp -->
+                <div class="chernobyl-warning-banner">
+                    <span class="hazard-icon">☢️</span>
+                    <span class="banner-text">BÁO ĐỘNG ĐỎ CẤP 7: THẢM HỌA VỠ LÕI HẠT NHÂN CHERNOBYL!</span>
+                    <span class="hazard-icon">☢️</span>
+                </div>
+
+                <!-- Bảng HUD chỉ số Lò phản ứng hạt nhân cực kỳ căng thẳng -->
+                <div class="reactor-hud-grid">
+                    <div class="hud-box hud-temp">
+                        <div class="hud-label">🌡️ NHIỆT ĐỘ LÕI 4</div>
+                        <div id="hud-temp-val" class="hud-value danger-text">3,828 °C</div>
+                        <div class="hud-bar-wrap">
+                            <div id="hud-temp-bar" class="hud-bar temp-fill"></div>
+                        </div>
+                    </div>
+                    <div class="hud-box hud-rad">
+                        <div class="hud-label">☢️ MỨC BỨC XẠ</div>
+                        <div id="hud-rad-val" class="hud-value danger-text">15,000 R/h</div>
+                        <div class="hud-subtext">CỰC KỲ NGUY HIỂM</div>
+                    </div>
+                    <div class="hud-box hud-countdown">
+                        <div class="hud-label">⏳ TỰ HỦY TRONG</div>
+                        <div id="hud-countdown-val" class="hud-value pulse-text">00:45</div>
+                        <div class="hud-subtext">ĐẾM NGƯỢC NỔ TUNG!</div>
+                    </div>
+                </div>
+
+                <!-- Lõi nguyên tử khổng lồ siêu bùng nổ (Giant Radioactive Meltdown Core) -->
+                <div class="meltdown-core-wrap">
+                    <div class="radiation-pulse-aura"></div>
+                    <div class="plasma-orbit-ring ring-1"></div>
+                    <div class="plasma-orbit-ring ring-2"></div>
+                    <div class="plasma-orbit-ring ring-3"></div>
+                    
+                    <div id="atom-nucleus" class="atom-nucleus meltdown-fire-core">
+                        <span id="core-symbol" class="core-symbol">💥</span>
+                        <div class="steam-vapors"></div>
+                    </div>
+
+                    <div class="electric-arc arc-top">⚡</div>
+                    <div class="electric-arc arc-bottom">⚡</div>
+                    <div class="electric-arc arc-left">⚡</div>
+                    <div class="electric-arc arc-right">⚡</div>
+                </div>
+
+                <h2 id="reactor-warning-title" class="reactor-warning-title chernobyl-title">
+                    LÕI SẮP NỔ TUNG! KÍCH HOẠT NGẮT KHẨN CẤP AZ-5!
+                </h2>
+
+                <p id="reactor-hint-text" class="reactor-hint chernobyl-hint">
+                    💡 <strong>MÃ NGẮT THANH ĐIỀU KHIỂN:</strong> Ngày sinh nhật của người xinh đẹp nhất thế giới (DDMMYYYY)
+                </p>
+
+                <!-- 8 Ô nhập mã điều khiển hạt nhân -->
+                <div id="pin-group" class="pin-input-group chernobyl-keypad">
+                    <input type="text" class="pin-box pin-nuclear" maxlength="1" inputmode="numeric" autocomplete="off" aria-label="Số thứ 1">
+                    <input type="text" class="pin-box pin-nuclear" maxlength="1" inputmode="numeric" autocomplete="off" aria-label="Số thứ 2">
+                    <input type="text" class="pin-box pin-nuclear" maxlength="1" inputmode="numeric" autocomplete="off" aria-label="Số thứ 3">
+                    <input type="text" class="pin-box pin-nuclear" maxlength="1" inputmode="numeric" autocomplete="off" aria-label="Số thứ 4">
+                    <input type="text" class="pin-box pin-nuclear" maxlength="1" inputmode="numeric" autocomplete="off" aria-label="Số thứ 5">
+                    <input type="text" class="pin-box pin-nuclear" maxlength="1" inputmode="numeric" autocomplete="off" aria-label="Số thứ 6">
+                    <input type="text" class="pin-box pin-nuclear" maxlength="1" inputmode="numeric" autocomplete="off" aria-label="Số thứ 7">
+                    <input type="text" class="pin-box pin-nuclear" maxlength="1" inputmode="numeric" autocomplete="off" aria-label="Số thứ 8">
+                </div>
+
+                <!-- Thông báo trạng thái phản ứng -->
+                <div id="reactor-feedback" class="msg-feedback"></div>
+
+                <!-- Nút bật/tắt còi báo động khẩn cấp -->
+                <div class="siren-control-wrap">
+                    <button id="btn-toggle-siren" class="cute-btn-outline" style="font-size: 0.85rem; padding: 8px 18px; border-radius: 20px;">
+                        🚨 Còi Hú & Máy Đo Geiger: <span id="siren-state-text">Đang hú dồn dập</span>
+                    </button>
+                </div>
+
+                <!-- Nút sau khi giải cứu thành công -->
+                <button id="btn-next-stage1" class="cute-btn btn-victory-next" style="display: none;">
+                    An toàn rồi tiếp tục nào 💖
+                </button>
+            </div>
+        </section>
+
+        <!-- =======================================================
+             📞 CHẶNG 2: CUỘC GỌI GIẢI CỨU TỪ JUNGKOOK (FAKE FACETIME)
+             ======================================================= -->
+        <section id="stage-2" class="stage">
+            <div class="phone-chassis">
+                <div class="phone-notch">
+                    <div class="camera-lens"></div>
+                </div>
+
+                <!-- 1. Màn hình chuông reo -->
+                <div id="call-screen" class="call-screen">
+                    <div class="caller-info">
+                        <div class="avatar-wrapper">
+                            <img id="jungkook-avatar" src="assets/images/jungkook-avatar.jpg" alt="Jungkook" class="caller-avatar" onerror="this.src='assets/images/anh2.jpg';">
+                            <div class="avatar-pulse"></div>
+                        </div>
+                        <h2 class="caller-name">Jungkook 🐰💜</h2>
+                        <p class="caller-status">FaceTime Video... Đang gọi đến ✨</p>
+                    </div>
+
+                    <!-- 2 Nút nghe máy và tắt máy (Chữ Tắt máy luôn chạy theo nút!) -->
+                    <div class="call-actions">
+                        <div id="wrap-decline-call" class="call-btn-wrap wrap-decline">
+                            <button id="btn-decline-call" class="call-btn btn-decline" title="Tắt máy">
+                                🚫
+                            </button>
+                            <span id="caption-decline" class="btn-caption">Tắt máy</span>
+                        </div>
+                        <div id="wrap-accept-call" class="call-btn-wrap wrap-accept">
+                            <button id="btn-accept-call" class="call-btn btn-accept" title="Nghe máy">
+                                📞
+                            </button>
+                            <span class="btn-caption">Nghe máy</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. Màn hình Video Call Đang Gọi -->
+                <div id="in-call-screen" class="in-call-screen">
+                    <div class="video-container" id="video-media-wrap">
+                        <img id="jungkook-video" src="assets/video/jungkook.jpg" alt="Jungkook FaceTime" class="video-media" onerror="this.src='assets/images/anh1.jpg';">
+                    </div>
+
+                    <div class="call-overlay">
+                        <div class="call-header-mini">
+                            <span style="font-weight: bold; font-size: 0.9rem;">Jungkook 🐰💜</span>
+                            <span id="call-timer" class="call-timer">00:00</span>
+                        </div>
+
+                        <div>
+                            <!-- Khung phụ đề Vietsub ngọt ngào -->
+                            <div class="subtitle-box">
+                                <span class="subtitle-badge">🐰 Jungkook Vietsub:</span>
+                                <p id="vietsub-text" class="subtitle-text"></p>
+                            </div>
+
+                            <button id="btn-next-stage2" class="cute-btn" style="width: 100%; display: none;">
+                                Bấm vào đây để nhận thêm bất ngờ 🎁
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- =======================================================
+             🎙️ CHẶNG 3: BẢN THU ÂM ÂM THANH BÍ MẬT (VOICE CHÚC MỪNG)
+             ======================================================= -->
+        <section id="stage-3" class="stage">
+            <div class="glass-card turntable-card">
+                <span class="intro-badge">🎙️ BẢN THU ÂM BÍ MẬT TỪ TWIEZ</span>
+                <h2 style="font-family: var(--font-heading); color: var(--dark-rose); margin-bottom: 8px;">
+                    Chiếc Đĩa Than Kỷ Niệm 🌸
+                </h2>
+                <p style="font-size: 0.95rem; color: #666; margin-bottom: 15px;">
+                    Hãy nhấn trái tim để lắng nghe giọng hát ngọt ngào dành riêng cho Lình!
+                </p>
+
+                <!-- Khung máy đĩa than -->
+                <div class="turntable-body">
+                    <!-- Đĩa Vinyl quay -->
+                    <div id="vinyl-record" class="vinyl-record">
+                        <div class="vinyl-grooves"></div>
+                        <div class="vinyl-center">
+                            <img id="vinyl-sticker" src="assets/images/sticker.png" alt="Sticker" onerror="this.src='assets/images/anh2.jpg';">
+                            <div class="vinyl-spindle"></div>
+                        </div>
+                    </div>
+
+                    <!-- Kim đĩa than (Tonearm) -->
+                    <div id="tonearm" class="tonearm">
+                        <div class="tonearm-base"></div>
+                        <div class="tonearm-stick"></div>
+                        <div class="tonearm-head"></div>
+                    </div>
+                </div>
+
+                <!-- Khung hiển thị dải sóng âm Waveform -->
+                <div class="waveform-box">
+                    <canvas id="waveform-canvas"></canvas>
+                </div>
+
+                <div id="voice-status-text" style="font-size: 0.9rem; color: var(--primary-pink); min-height: 24px; font-weight: 600; margin-bottom: 12px;">
+                    Sẵn sàng phát bản thu âm...
+                </div>
+
+                <!-- Nút Play hình trái tim lớn -->
+                <button id="btn-play-voice" class="heart-play-btn" title="Phát bản thu từ Twiez">
+                    🎧
+                </button>
+                <div style="font-family: var(--font-heading); font-size: 0.9rem; font-weight: bold; color: var(--dark-rose); margin-top: 8px;">
+                    Phát bản thu từ Twiez 🎧
+                </div>
+
+                <!-- Đổi thành "Tiếp tục đi người đẹp 💖" theo yêu cầu người dùng -->
+                <div style="margin-top: 24px;">
+                    <button id="btn-next-stage3" class="cute-btn cute-btn-outline" style="display: none;">
+                        Tiếp tục đi người đẹp 💖
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- =======================================================
+             💌 CHẶNG 4: MÓN QUÀ TỪ TWIEZ (THƯ CHÚC MỪNG SINH NHẬT)
+             ======================================================= -->
+        <section id="stage-4" class="stage">
+            <div class="letter-wrapper">
+                <article class="letter-paper">
+                    <!-- Con tem kỷ niệm -->
+                    <div class="letter-stamp">
+                        🌸
+                        <span>20 YRS</span>
+                    </div>
+
+                    <h2 id="letter-title" class="letter-title">
+                        Gửi Cẩm Lình - Tuổi 20 Rực Rỡ ✨
+                    </h2>
+
+                    <!-- Nội dung gõ chữ bức thư -->
+                    <div id="letter-body" class="letter-body"></div>
+
+                    <div class="letter-footer">
+                        Thương gửi từ Twiez 💖
+                    </div>
+                </article>
+
+                <div style="text-align: center; margin-top: 24px;">
+                    <button id="btn-replay-all" class="cute-btn">
+                        Xem lại từ đầu 🔄
+                    </button>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Scripts -->
+    <script src="js/config.js"></script>
+    <script src="js/audio.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
